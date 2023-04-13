@@ -12,7 +12,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      - name: get-name
+        run: |
+            echo "REPO_NAME=$(basename ${{ github.repository }})" >> $GITHUB_ENV
+      - name: print-name
+        run: |
+            echo "${{ env.REPO_NAME }}"
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -22,8 +27,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:${{ github.sha }} .
+          docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.REPO_NAME }}:${{ github.sha }} .
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:${{ github.sha }}
+          docker push ghcr.io/${{ github.repository_owner }}/${{ env.REPO_NAME }}:${{ github.sha }}
