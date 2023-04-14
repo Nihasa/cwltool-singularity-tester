@@ -47,7 +47,7 @@ RUN wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/sin
 
 # Install CWLTool
 RUN pip3 install cwltool
-RUN pip install 'pyparsing<3; python_version <= "3.6"'
+RUN pip3 install 'pyparsing<3; python_version <= "3.6"'
 # Set environment variables
 ENV SINGULARITY_CACHEDIR=/tmp/singularity-cache
 ENV SINGULARITY_TMPDIR=/tmp/singularity-tmp
