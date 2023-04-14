@@ -46,6 +46,8 @@ RUN wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/sin
     rm -rf ~/rpmbuild singularity-ce-$VERSION*.tar.gz
 
 # Install CWLTool
+RUN pip3 install --upgrade pip setuptools
+RUN pip3 install lockfile
 RUN pip3 install cwltool
 # RUN pip3 install 'pyparsing<3; python_version <= "3.6"'
 # Set environment variables
